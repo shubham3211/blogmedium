@@ -40,9 +40,11 @@ export default function SignUp() {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const { setUser } = useUserContext();
+  const [message, setMessage] = useState("");
 
   const signupRequest = async () => {
     try {
+      setMessage("Signing up the user");
       const response = await api.post("/user/signup", {
         email,
         password,
@@ -51,6 +53,7 @@ export default function SignUp() {
       });
       setUser(response.data.user);
       setToken(response.data.jwt);
+      setMessage("User Signup Done");
     } catch (err) {
       console.error(err);
     }
@@ -125,6 +128,9 @@ export default function SignUp() {
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
+          </Grid>
+          <Grid container>
+            <Grid item>Signup message : {message}</Grid>
           </Grid>
         </form>
       </div>

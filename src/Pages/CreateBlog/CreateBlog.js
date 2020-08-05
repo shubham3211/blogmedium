@@ -51,6 +51,7 @@ export default function CreateBlog() {
   const [image, setImage] = useState("");
   const [body, setBody] = useState("");
   const [tags, setTags] = useState([]);
+  const [message, setMessage] = useState("");
 
   const handleDelete = i => {
     setTags(arr => {
@@ -67,6 +68,7 @@ export default function CreateBlog() {
   const createBlogRequest = async () => {
     try {
       const token = getToken();
+      setMessage("creating");
       const response = await api.post(
         "/blog/create",
         {
@@ -82,7 +84,9 @@ export default function CreateBlog() {
         }
       );
       if (response.data.done) {
-        return <Redirect to="/blogs" />;
+        setMessage("Blog Created");
+      } else {
+        setMessage("Blog not created");
       }
     } catch (err) {
       console.error(err);
@@ -157,6 +161,9 @@ export default function CreateBlog() {
                 {"See your blogs"}
               </Link>
             </Grid>
+          </Grid>
+          <Grid container>
+            <Grid item>Blog Creation Message : {message}</Grid>
           </Grid>
         </form>
       </div>
