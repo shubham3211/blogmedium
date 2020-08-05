@@ -5,7 +5,7 @@ let baseURL;
 
 switch (process.env.NODE_ENV) {
   case "production":
-    baseURL = "https://appserver.theclosecompany.com/api";
+    baseURL = "https://blogmedium123.herokuapp.com/";
     break;
   case "development":
     baseURL = "http://localhost:5000/";
